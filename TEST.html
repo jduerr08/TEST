@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="/Volumes/MacVol/JoshD/TEST/Test WebFront/Style.css">
+<center><img src="/Volumes/MacVol/JoshD/TEST/Test WebFront/images/TEST.png" alt="logo" width="264" height="29"></center>
+<body>
+    <h1>This is a Test</h1>
+    <form action="/Applications/Bedford WebFront/app/Sent To Esko.html" method="post">
+            <legend>Data</legend><br>
+			<div class="row">
+  			<div class="column">
+				<label for="option">Option:</label>
+				<select id="option" name="option">
+				<option value=""></option>
+				<option value="option1">Option 1</option>
+				<option value="option2">Option 2</option>
+			</div>
+			</div>
+    </form>
+	<br>
+<script>
+    let saveFile = () => {
+    	
+        // Get the data from each element on the form.
+    	const tagtype = document.getElementById('option');
+        const artnumber = document.getElementById('artnumber');
+        const quotenumber = document.getElementById('quotenumber');
+        const logobrandname = document.getElementById('logobrandname');
+        const eskofoldername = document.getElementById('eskofoldername');
+        
+        // This variable stores all the data.
+        let data = 
+            '<option>'+tagtype.value+'</option>'+
+            '<artnumber>'+artnumber.value+'</artnumber>'+
+            '<quotenumber>'+quotenumber.value+'</quotenumber>'+
+            '<logobrandname>'+logobrandname.value+'</logobrandname>' +
+            '<eskofoldername>'+eskofoldername.value+'</eskofoldername>';
+        
+        // Convert the text to BLOB.
+        const textToBLOB = new Blob([data], { type: 'text/plain' });
+        const sFileName = 'formData.xml';	   // The file to save the data.
+
+        let newLink = document.createElement("a");
+        newLink.download = sFileName;
+
+        if (window.webkitURL != null) {
+            newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+        }
+        else {
+            newLink.href = window.URL.createObjectURL(textToBLOB);
+            newLink.style.display = "none";
+            document.body.appendChild(newLink);
+        }
+
+        newLink.click(); 
+    }
+</script>
+</body>
+</html>
